@@ -1,0 +1,17 @@
+{
+  "chain_id": "oes-devnet-1",
+  "evm_chain_id": 20261001,
+  "base_denom": "uoes",
+  "display_denom": "OES",
+  "decimals": 18,
+  "genesis_supply_oes": "1000000000",
+  "allocations": [
+    {"name": "ecosystem", "percent": 30},
+    {"name": "validators", "percent": 20},
+    {"name": "treasury", "percent": 15},
+    {"name": "development", "percent": 10},
+    {"name": "liquidity", "percent": 10},
+    {"name": "community", "percent": 10},
+    {"name": "strategic", "percent": 5}
+  ]
+}
