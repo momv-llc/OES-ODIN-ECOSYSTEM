@@ -1,0 +1,18 @@
+version: 1
+environments:
+  local:
+    intent: developer-isolated
+    persistence: ephemeral
+    secrets: local-secret-store
+  devnet:
+    intent: integration
+    persistence: disposable
+    secrets: deployment-secret-store
+  testnet:
+    intent: public-validation
+    persistence: managed
+    secrets: deployment-secret-store
+  mainnet:
+    intent: production
+    persistence: managed
+    secrets: external-secret-manager
