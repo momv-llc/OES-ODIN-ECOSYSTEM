@@ -30,6 +30,7 @@ Configuration is selected with `OES_ENV` and validates against `chain/config/env
 make check
 make test
 make build
+make genesis
 make integration-test
 make docker-validate
 ```

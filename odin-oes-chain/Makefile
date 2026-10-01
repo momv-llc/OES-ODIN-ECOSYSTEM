@@ -23,10 +23,16 @@ docker-validate: ## Render Docker Compose configuration for each environment.
 tree: ## Print the intended top-level repository structure.
 	@find . -maxdepth 2 -type d | sort
 
-.PHONY: build integration-test
+.PHONY: build integration-test genesis genesis-validate
 
 build: ## Build the oesd node binary.
 	@go build -o bin/oesd ./cmd/oesd
+
+genesis: build ## Generate native OES genesis.json from tokenomics.yaml.
+	@python3 scripts/generate_genesis.py
+
+genesis-validate: ## Validate supply and allocation policy without building a node.
+	@python3 scripts/generate_genesis.py --validate-only
 
 integration-test: build ## Verify node initialization, genesis and CLI lifecycle.
 	@bash tests/node_lifecycle_test.sh ./bin/oesd
