@@ -1,0 +1,34 @@
+name: oes-foundation
+services:
+  postgres:
+    image: postgres:17.6-alpine
+    environment:
+      POSTGRES_DB: oes_explorer
+      POSTGRES_USER: oes_indexer
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
+    secrets:
+      - postgres_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    profiles: [indexing]
+    healthcheck:
+      test: [CMD-SHELL, pg_isready -U oes_indexer -d oes_explorer]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  prometheus:
+    image: prom/prometheus:v3.5.0
+    command: [--config.file=/etc/prometheus/prometheus.yml]
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    profiles: [observability]
+  grafana:
+    image: grafana/grafana:12.1.0
+    volumes:
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+    profiles: [observability]
+secrets:
+  postgres_password:
+    environment: OES_POSTGRES_PASSWORD
+volumes:
+  postgres_data:
