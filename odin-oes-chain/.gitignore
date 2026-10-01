@@ -1,0 +1,23 @@
+# Secrets and environment overrides
+.env
+.env.*
+!.env.schema
+*.key
+*.pem
+*.mnemonic
+
+# Build and local state
+bin/
+dist/
+coverage/
+node_modules/
+chain/.state/
+infra/postgres/data/
+
+# Editors and OS
+.DS_Store
+.idea/
+.vscode/
+
+__pycache__/
+*.py[cod]
