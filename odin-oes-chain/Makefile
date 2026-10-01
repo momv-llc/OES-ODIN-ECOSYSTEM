@@ -22,3 +22,11 @@ docker-validate: ## Render Docker Compose configuration for each environment.
 
 tree: ## Print the intended top-level repository structure.
 	@find . -maxdepth 2 -type d | sort
+
+.PHONY: build integration-test
+
+build: ## Build the oesd node binary.
+	@go build -o bin/oesd ./cmd/oesd
+
+integration-test: build ## Verify node initialization, genesis and CLI lifecycle.
+	@bash tests/node_lifecycle_test.sh ./bin/oesd

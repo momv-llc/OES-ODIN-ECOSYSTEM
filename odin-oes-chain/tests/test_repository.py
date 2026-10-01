@@ -19,6 +19,7 @@ class RepositoryFoundationTests(unittest.TestCase):
     def test_adr_pins_evm_dependency_pair(self):
         adr = (ROOT / "docs/ADR-001-stack.md").read_text(encoding="utf-8")
         self.assertIn("Cosmos SDK | `v0.54.3`", adr)
+        self.assertTrue((ROOT / "go.mod").is_file())
         self.assertIn("CometBFT | `v0.39.3`", adr)
 
 

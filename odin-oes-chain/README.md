@@ -29,14 +29,17 @@ Configuration is selected with `OES_ENV` and validates against `chain/config/env
 ```bash
 make check
 make test
+make build
+make integration-test
 make docker-validate
 ```
 
-These commands validate repository contracts only. They do not start a chain or publish an artifact.
+The integration target creates an isolated temporary CometBFT home, validates genesis, and exercises the node CLI. It does not publish an artifact.
 
 ## Repository layout
 
-- `chain/` — future Go chain application boundary and environment policy.
+- Go module root and `cmd/oesd/` — OES Cosmos SDK, CometBFT, and Cosmos EVM application plus node CLI.
+- `chain/` — chain application boundary documentation and environment policy.
 - `contracts/` — Solidity source and test boundaries.
 - `explorer/`, `wallet/` — React/TypeScript application boundaries.
 - `infra/` — container, database, metrics, and dashboard provisioning.
