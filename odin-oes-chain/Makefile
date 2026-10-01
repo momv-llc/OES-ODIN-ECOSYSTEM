@@ -36,3 +36,14 @@ genesis-validate: ## Validate supply and allocation policy without building a no
 
 integration-test: build ## Verify node initialization, genesis and CLI lifecycle.
 	@bash tests/node_lifecycle_test.sh ./bin/oesd
+
+.PHONY: devnet smoke-test devnet-down
+
+devnet: ## Build and start the three-validator OES devnet.
+	@docker compose -f docker-compose.devnet.yml up -d --build
+
+smoke-test: ## Verify consensus and a 100 OES native bank transfer.
+	@bash scripts/devnet_smoke_test.sh
+
+devnet-down: ## Stop the OES devnet and remove its persistent volumes.
+	@docker compose -f docker-compose.devnet.yml down -v
